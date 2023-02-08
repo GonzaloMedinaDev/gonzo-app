@@ -17,20 +17,27 @@ const readingTime = (content) => {
 const Field = () => {
   const sdk = useSDK();
   const contentField = sdk.entry.fields[CONTENT_FIELD_ID];
-  const [blogText, setBlogText] = useState(contentField.getValue());
+  // const [blogText, setBlogText] = useState(contentField.getValue());
 
   // console.log('blogText', blogText);
   const [timeToRead, setTimeToRead] = useState('0 minutes read');
 
   useEffect(() => {
     const detach = contentField.onValueChanged((value) => {
-      setBlogText(value);
+      // setBlogText(value);
       setTimeToRead(readingTime(value));
     });
     return () => detach();
-  }, [blogText, contentField]);
+  }, [contentField]);
 
-  return <TextInput name='time-read' value={timeToRead} readOnly={true} />;
+  return (
+    <>
+      <TextInput name='time-read' value={timeToRead} readOnly={true} />
+      <span>
+        <small>small text</small>
+      </span>
+    </>
+  );
 };
 
 export default Field;
