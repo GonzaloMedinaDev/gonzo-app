@@ -14,13 +14,16 @@ const readingTime = (content) => {
   return `${minutes} minute${minutes > 1 ? 's' : ''} read`;
 };
 
-const Field = () => {
+const Field = (props) => {
   const sdk = useSDK();
   const contentField = sdk.entry.fields[CONTENT_FIELD_ID];
   // const [blogText, setBlogText] = useState(contentField.getValue());
 
-  // console.log('blogText', blogText);
+  console.log('@@@', props.sdk.field.getValue());
+
   const [timeToRead, setTimeToRead] = useState('0 minutes read');
+
+  // props.sdk.field.setValue({list: props.sdk.field.getValue().list.concat(...)});
 
   useEffect(() => {
     const detach = contentField.onValueChanged((value) => {
@@ -32,9 +35,14 @@ const Field = () => {
 
   return (
     <>
-      <TextInput name='time-read' value={timeToRead} readOnly={true} />
+      <TextInput
+        name='time-read'
+        labelText='time-read'
+        value={timeToRead}
+        readOnly={true}
+      />
       <span>
-        <small>small text</small>
+        <small>v2.0.0</small>
       </span>
     </>
   );
